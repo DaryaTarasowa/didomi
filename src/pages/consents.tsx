@@ -1,21 +1,18 @@
 import { getConsents } from "../api/consents.ts";
-import Pagination from "../components/Paginator.tsx";
 
-import {
-    useQuery,
-} from "@tanstack/react-query"
-import { useState } from "react";
-import { IConsent } from "../types/consentTypes.ts";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
 
+import { useQuery } from "@tanstack/react-query"
 
-export default function Consent() {
+export default function ConsentsForm(props: { consentsPerPage: number }) {
     const {
         data,
         isLoading,
         // error,
         // isError,
         // isLoadingError,
-        // refetchå
+        // refetch
     } = useQuery({
         queryKey: ["consents"],
         queryFn: getConsents,
@@ -24,21 +21,24 @@ export default function Consent() {
         retry: 1
     });
 
-    const itemsPerPage = 2;
-    const [pageConsents, setPageConsents] = useState([]);
-
-    const emails = data?.map((item: IConsent) => item.email);
-
-    if (isLoading)
-        return <div>Loading...</div>;
+    const columns: GridColDef[] = [
+        { field: "name", headerName: "Name", width: 150 },
+        { field: "email", headerName: "Email", width: 300 },
+        { field: "consents", headerName: "Consent given for", width: 400 },
+    ]
 
     return (
-        <>
-            <div>
-                { pageConsents.map((consent) => (<div>{ consent }</div>)) }
-            </div>
-            <Pagination items={ emails } setPageItems={ setPageConsents } itemsPerPage={ itemsPerPage }/>
-        </>
+        <Paper>
+            <DataGrid
+                rows={ data }
+                columns={ columns }
+                loading={ isLoading }
+                initialState={ { pagination: { paginationModel: {pageSize: props.consentsPerPage} } } }
+                pageSizeOptions={[props.consentsPerPage]}
+                sx={ { border: 0 } }
+                getRowId={ (row) => row.email }
+            />
+        </Paper>
 
     )
 }

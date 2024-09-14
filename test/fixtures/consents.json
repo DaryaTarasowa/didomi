@@ -1,14 +1,8 @@
-[{
-  "name": "Darya",
-  "email": "darya.tarasova@example.com",
-  "newsletter": true,
-  "targetedAds": true,
-  "statistics": true
-},
+[
   {
-    "name": "Peter",
-    "email": "peter@example.com",
-    "newsletter": false,
+    "name": "Darya",
+    "email": "darya.surname@example.com",
+    "newsletter": true,
     "targetedAds": true,
     "statistics": true
   },
@@ -18,5 +12,61 @@
     "newsletter": false,
     "targetedAds": false,
     "statistics": false
+  },
+  {
+    "name": "Peter",
+    "email": "peter@example.com",
+    "newsletter": false,
+    "targetedAds": true,
+    "statistics": true
+  },
+  {
+    "name": "Anna",
+    "email": "anna@example.com",
+    "newsletter": true,
+    "targetedAds": false,
+    "statistics": true
+  },
+  {
+    "name": "Frank",
+    "email": "frank@example.com",
+    "newsletter": true,
+    "targetedAds": true,
+    "statistics": false
+  },
+  {
+    "name": "Helen",
+    "email": "helen@example.com",
+    "newsletter": true,
+    "targetedAds": false,
+    "statistics": false
+  },
+  {
+    "name": "Amin",
+    "email": "amin@example.com",
+    "newsletter": false,
+    "targetedAds": true,
+    "statistics": false
+  },
+  {
+    "name": "Sara",
+    "email": "sara@example.com",
+    "newsletter": false,
+    "targetedAds": false,
+    "statistics": true
+  },
+  {
+    "name": "Erik",
+    "email": "erik@example.com"
+  },
+  {
+    "name": "Maria",
+    "email": "maria@example.com",
+    "newsletter": true
+  },
+  {
+    "name": "Bob",
+    "email": "bob@example.com",
+    "targetedAds": false
   }
 ]
