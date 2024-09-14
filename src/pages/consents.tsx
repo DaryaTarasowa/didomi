@@ -1,9 +1,15 @@
 import { getConsents } from "../api/consents.ts";
 
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import {
+    DataGrid,
+    GridColDef,
+    GridPagination,
+} from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 
 import { useQuery } from "@tanstack/react-query"
+import Paginator from "../components/Paginator.tsx";
+
 
 export default function ConsentsForm(props: { consentsPerPage: number }) {
     const {
@@ -33,12 +39,19 @@ export default function ConsentsForm(props: { consentsPerPage: number }) {
                 rows={ data }
                 columns={ columns }
                 loading={ isLoading }
-                initialState={ { pagination: { paginationModel: {pageSize: props.consentsPerPage} } } }
-                pageSizeOptions={[props.consentsPerPage]}
-                sx={ { border: 0 } }
+                pagination
+                slots={ { pagination: () => <GridPagination ActionsComponent={ Paginator }/> } }
+                slotProps={ {
+                    loadingOverlay: {
+                        variant: 'skeleton',
+                        noRowsVariant: 'skeleton',
+                    },
+                } }
+                initialState={ { pagination: { paginationModel: { pageSize: props.consentsPerPage } } } }
+                pageSizeOptions={ [props.consentsPerPage] }
+                sx={ { border: 0, "& .MuiTablePagination-displayedRows": { display: "none" } } }
                 getRowId={ (row) => row.email }
             />
         </Paper>
-
     )
 }

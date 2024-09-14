@@ -1,66 +1,26 @@
-import { useEffect, useState } from "react";
+import { TablePaginationProps } from "@mui/material";
+import { gridPageCountSelector, useGridApiContext, useGridSelector } from "@mui/x-data-grid";
+import MuiPagination from "@mui/material/Pagination";
 
-function usePagination<T>(items: T[], pageLimit: number) {
-    const [pageNumber, setPageNumber] = useState(0);
-    const pageCount = Math.ceil(items.length / pageLimit);
-
-    const setPage = (pN: number) => {
-        setPageNumber(pN);
-    };
-
-    const getPageItems = () => {
-        const s = pageNumber * pageLimit;
-        const e = s + pageLimit;
-        return items.slice(s, e);
-    };
-
-    const setPageNext = () => {
-        setPageNumber(Math.min(pageNumber + 1, pageCount - 1));
-    };
-
-    const setPagePrevious = () => {
-        setPageNumber(Math.max(pageNumber - 1, 0));
-    };
-
-    return {
-        pageNumber,
-        pageCount,
-        getPageItems,
-        setPage,
-        setPageNext,
-        setPagePrevious,
-    };
-}
-
-interface IPagination<T> {
-    items: T[],
-    itemsPerPage: number,
-
-    setPageItems(pageData: () => T[]): void,
-}
-
-function Pagination<T>(props: IPagination<T>) {
-    const { items, itemsPerPage, setPageItems } = props;
-    const { pageNumber, setPage, getPageItems, setPageNext, setPagePrevious } =
-        usePagination(items, itemsPerPage);
-
-    useEffect(() => {
-        setPageItems(getPageItems);
-    }, [pageNumber]);
+function Pagination({
+                        page,
+                        onPageChange,
+                        className,
+                    }: Pick<TablePaginationProps, 'page' | 'onPageChange' | 'className'>) {
+    const apiRef = useGridApiContext();
+    const pageCount = useGridSelector(apiRef, gridPageCountSelector);
 
     return (
-        <div>
-            <b onClick={ setPagePrevious }>Prev</b>
-            <input
-                value={ pageNumber }
-                onChange={ (e) => {
-                    setPage(e.target.valueAsNumber);
-                } }
-                type="number"
-            />
-            <b onClick={ setPageNext }>Next</b>
-        </div>
+        <MuiPagination
+            color="primary"
+            className={className}
+            count={pageCount}
+            page={page + 1}
+            onChange={(event, newPage) => {
+                onPageChange(event as any, newPage - 1);
+            }}
+        />
     );
-};
+}
 
-export default Pagination;
+export default Pagination
