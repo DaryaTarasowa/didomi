@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import "./index.css";
 
 import Root from "./pages/root.js";
-import ErrorPage from "./error-page";
+import ErrorPage from "./pages/errorPage.tsx";
 import Consent from "./pages/give-consent.tsx";
 import ConsentsList from "./pages/consents.tsx";
 

@@ -1,22 +1,21 @@
 import { getConsents } from "../api/consents.ts";
 
 import {
-    DataGrid,
     GridColDef,
-    GridPagination,
 } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 
 import { useQuery } from "@tanstack/react-query"
-import Paginator from "../components/Paginator.tsx";
+import PaginatedTable from "../components/PaginatedTable.tsx";
+import { constructErrorMessage } from "../utils/errorHandling.ts";
 
 
-export default function ConsentsForm(props: { consentsPerPage: number }) {
+export default function Consents(props: { consentsPerPage: number }) {
     const {
         data,
         isLoading,
-        // error,
-        // isError,
+        error,
+        isError,
         // isLoadingError,
         // refetch
     } = useQuery({
@@ -27,6 +26,8 @@ export default function ConsentsForm(props: { consentsPerPage: number }) {
         retry: 1
     });
 
+    const errorMessage = isError ? constructErrorMessage(error!) : undefined;
+
     const columns: GridColDef[] = [
         { field: "name", headerName: "Name", width: 150 },
         { field: "email", headerName: "Email", width: 300 },
@@ -35,23 +36,7 @@ export default function ConsentsForm(props: { consentsPerPage: number }) {
 
     return (
         <Paper>
-            <DataGrid
-                rows={ data }
-                columns={ columns }
-                loading={ isLoading }
-                pagination
-                slots={ { pagination: () => <GridPagination ActionsComponent={ Paginator }/> } }
-                slotProps={ {
-                    loadingOverlay: {
-                        variant: 'skeleton',
-                        noRowsVariant: 'skeleton',
-                    },
-                } }
-                initialState={ { pagination: { paginationModel: { pageSize: props.consentsPerPage } } } }
-                pageSizeOptions={ [props.consentsPerPage] }
-                sx={ { border: 0, "& .MuiTablePagination-displayedRows": { display: "none" } } }
-                getRowId={ (row) => row.email }
-            />
+            <PaginatedTable columns={columns} errorMessage={errorMessage} itemsPerPage={props.consentsPerPage} items={data} isLoading={isLoading}/>
         </Paper>
     )
 }

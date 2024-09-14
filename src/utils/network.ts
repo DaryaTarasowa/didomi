@@ -6,7 +6,7 @@ const { VITE_CONSENTS_API_URL } = import.meta.env; //TODO add env validation
 
 if (import.meta.env.MODE === "development") {
     const mocker = HttpRequestMock.setup();
-    mocker.get(`${ VITE_CONSENTS_API_URL }/consents`, consentsFixture);
+    mocker.get(`${ VITE_CONSENTS_API_URL }/consentsxx`, consentsFixture);
 }
 
 const client = axios.create({
