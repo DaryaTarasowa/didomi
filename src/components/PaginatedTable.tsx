@@ -11,11 +11,11 @@ interface IPaginatedTable<T> {
     errorMessage?: string
 }
 
-
 export default function PaginatedTable<T>(props: IPaginatedTable<T>) {
-    const CustomNoRowsOverlay = (errorMessage: string | undefined) => {
+    const CustomNoRowsOverlay = () => {
+        const textToShow = props.errorMessage || "No Rows";
         return (
-            <Box>{errorMessage ?? "No rows"}</Box>
+            <Box>{ textToShow }</Box>
         );
     }
     const CustomPagination = () => {
@@ -24,25 +24,18 @@ export default function PaginatedTable<T>(props: IPaginatedTable<T>) {
             labelDisplayedRows={ () => {
                 return null
             } }
-            slots={ {
-                actions: {
-                    previousButton: () => <p>Previous</p>
-                }
-            } }
-            showFirstButton={ true }
         />
     }
-
     return (
         <Paper>
             <DataGrid
-                rows={ [] }
+                rows={ props.items }
                 columns={ props.columns }
                 loading={ props.isLoading }
                 pagination
                 slots={ {
                     pagination: CustomPagination,
-                    noRowsOverlay: () => CustomNoRowsOverlay(props.errorMessage),
+                    noRowsOverlay: CustomNoRowsOverlay,
                 } }
                 slotProps={ {
                     loadingOverlay: {
