@@ -1,0 +1,22 @@
+[{
+  "name": "Darya",
+  "email": "darya.tarasova@example.com",
+  "newsletter": true,
+  "targetedAds": true,
+  "statistics": true
+},
+  {
+    "name": "Peter",
+    "email": "peter@example.com",
+    "newsletter": false,
+    "targetedAds": true,
+    "statistics": true
+  },
+  {
+    "name": "Damian",
+    "email": "damian-surname@example.com",
+    "newsletter": false,
+    "targetedAds": false,
+    "statistics": false
+  }
+]
