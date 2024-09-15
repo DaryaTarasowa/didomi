@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Root() {
@@ -7,10 +8,10 @@ export default function Root() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to={ `/give-consent.tsx` }>Give consent</Link>
+                            <Link to={ `/give-consent` }>Give consent</Link>
                         </li>
                         <li>
-                            <Link to={ `/consents.tsx` }>Collected consents</Link>
+                            <Link to={ `/consents` }>Collected consents</Link>
                         </li>
                     </ul>
                 </nav>

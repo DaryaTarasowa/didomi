@@ -1,8 +1,15 @@
+import React from "react";
+
 import { PaginationItem, TablePaginationProps } from "@mui/material";
-import { gridPageCountSelector, useGridApiContext, useGridSelector } from "@mui/x-data-grid";
+import {
+    gridPageCountSelector,
+    useGridApiContext,
+    useGridSelector
+} from "@mui/x-data-grid";
 import MuiPagination from "@mui/material/Pagination";
 
-function Pagination({
+
+export default function Paginator({
                         page,
                         onPageChange,
                         className,
@@ -12,12 +19,11 @@ function Pagination({
     const showPagination = pageCount > 1;
     return (
         <MuiPagination
-            color="primary"
             className={className}
             count={pageCount}
             page={page + 1}
             onChange={(event, newPage) => {
-                onPageChange(event as any, newPage - 1);
+                onPageChange(event as never, newPage - 1);
             }}
             renderItem={(item) => (
                 <PaginationItem
@@ -31,5 +37,3 @@ function Pagination({
         />
     );
 }
-
-export default Pagination

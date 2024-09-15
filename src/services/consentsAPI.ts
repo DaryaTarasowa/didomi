@@ -6,9 +6,10 @@ export const getConsents = () =>
         method: "GET",
     })
 
-export const addConsent = () =>
+export const addConsent = (data: any) =>
     request({
         url: `consents`,
-        method: "POST"
+        method: "POST",
+        data
     })
 

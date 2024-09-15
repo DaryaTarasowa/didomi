@@ -1,4 +1,7 @@
-export default function ErrorScreen(props: {errorMessage: string}) {
+import React from "react";
+import { FC, ReactElement } from "react";
+
+const ErrorScreen: FC<{errorMessage: string}> = (props: {errorMessage: string}): ReactElement | null => {
     return (
         <div id="error-page">
             <h1>Oops!</h1>
@@ -9,3 +12,6 @@ export default function ErrorScreen(props: {errorMessage: string}) {
         </div>
     )
 }
+
+export default ErrorScreen
+

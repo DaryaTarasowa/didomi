@@ -1,4 +1,5 @@
-import { getConsents } from "../api/consents.ts";
+import React from "react";
+import { getConsents } from "../services/consentsAPI.ts";
 
 import {
     GridColDef,
@@ -8,7 +9,8 @@ import Paper from '@mui/material/Paper';
 import { useQuery } from "@tanstack/react-query"
 import PaginatedTable from "../components/PaginatedTable.tsx";
 import { constructErrorMessage } from "../utils/errorHandling.ts";
-
+import ErrorScreen from "../components/ErrorScreen.tsx";
+import Paginator from "../components/Pagination/MUIPagination.tsx";
 
 export default function Consents(props: { consentsPerPage: number }) {
     const {
@@ -26,7 +28,7 @@ export default function Consents(props: { consentsPerPage: number }) {
         retry: 1
     });
 
-    const errorMessage = isError ? constructErrorMessage(error!) : undefined;
+    const errorOverlay = isError ? <ErrorScreen errorMessage = {constructErrorMessage(error)}/> : undefined;
 
     const columns: GridColDef[] = [
         { field: "name", headerName: "Name", width: 150 },
@@ -36,7 +38,14 @@ export default function Consents(props: { consentsPerPage: number }) {
 
     return (
         <Paper>
-            <PaginatedTable columns={columns} errorMessage={errorMessage} itemsPerPage={props.consentsPerPage} items={data} isLoading={isLoading}/>
+            <PaginatedTable
+                columns={columns}
+                errorOverlay={errorOverlay}
+                itemsPerPage={props.consentsPerPage}
+                items={data}
+                isLoading={isLoading}
+                paginator={Paginator}
+            />
         </Paper>
     )
 }
