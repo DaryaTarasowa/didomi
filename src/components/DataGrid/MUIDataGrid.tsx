@@ -5,9 +5,8 @@ import {
     GridNoRowsOverlay,
     GridPagination,
 } from "@mui/x-data-grid";
-import Paginator from "./Pagination/MUIPagination.tsx";
+import Paginator from "../Pagination/MUIPagination.tsx";
 import { TablePaginationActionsProps } from "@mui/material/TablePagination/TablePaginationActions";
-
 
 interface IPaginatedTable<T> {
     columns: GridColDef[],
@@ -18,7 +17,7 @@ interface IPaginatedTable<T> {
     paginator?:  React.ElementType<TablePaginationActionsProps, keyof React.JSX.IntrinsicElements> | undefined
 }
 
-export default function PaginatedTable<T>(props: IPaginatedTable<T>) {
+export default function MUIDataGrid<T>(props: IPaginatedTable<T>) {
     const errorOverlay = props.errorOverlay ?? <GridNoRowsOverlay/>;
     const CustomNoRowsOverlay = () => {
         return (

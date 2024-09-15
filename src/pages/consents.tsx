@@ -7,9 +7,9 @@ import {
 import Paper from '@mui/material/Paper';
 
 import { useQuery } from "@tanstack/react-query"
-import PaginatedTable from "../components/PaginatedTable.tsx";
+import MUIDataGrid from "../components/DataGrid/MUIDataGrid.tsx";
 import { constructErrorMessage } from "../utils/errorHandling.ts";
-import ErrorScreen from "../components/ErrorScreen.tsx";
+import ErrorScreen from "../components/ErrorScreen/ErrorScreen.tsx";
 import Paginator from "../components/Pagination/MUIPagination.tsx";
 
 export default function Consents(props: { consentsPerPage: number }) {
@@ -38,7 +38,7 @@ export default function Consents(props: { consentsPerPage: number }) {
 
     return (
         <Paper>
-            <PaginatedTable
+            <MUIDataGrid
                 columns={columns}
                 errorOverlay={errorOverlay}
                 itemsPerPage={props.consentsPerPage}
