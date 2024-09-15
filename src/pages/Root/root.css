@@ -1,0 +1,41 @@
+
+#appRoot {
+    display: flex;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+}
+
+#sidebar {
+    width: 20%;
+    flex-shrink: 0;
+
+    & .MuiDrawer-paper {
+        width: 20%;
+        box-sizing: border-box;
+        background-color: var(--mui-palette-primary-main);
+    }
+    a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        margin: 8px 0;
+        border: 1px solid var(--mui-palette-primary-light);
+        color: var(--mui-palette-primary-contrastText);
+        border-radius: 5px;
+
+        &:hover {
+            background-color: var(--mui-palette-secondary-dark);
+        }
+
+        &.active{
+            background-color: var(--mui-palette-secondary-dark);
+        }
+    }
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
