@@ -1,12 +1,10 @@
 import React from "react";
-
-import { PaginationItem, TablePaginationProps } from "@mui/material";
+import { Pagination as MuiPagination, PaginationItem, TablePaginationProps, Typography } from "@mui/material";
 import {
     gridPageCountSelector,
     useGridApiContext,
     useGridSelector
 } from "@mui/x-data-grid";
-import MuiPagination from "@mui/material/Pagination";
 
 
 export default function Paginator({
@@ -19,6 +17,7 @@ export default function Paginator({
     const showPagination = pageCount > 1;
     return (
         <MuiPagination
+            color="primary"
             className={className}
             count={pageCount}
             page={page + 1}
@@ -28,8 +27,8 @@ export default function Paginator({
             renderItem={(item) => (
                 <PaginationItem
                     slots={{
-                        next: () => showPagination ? "Next page >>" : null,
-                        previous: () => showPagination ? "<< Previous page" : null,
+                        next: () => showPagination ? <Typography color="textPrimary">{"Next page >>"}</Typography>: null,
+                        previous: () => showPagination ? <Typography color="textPrimary">{"<< Previous page"}</Typography> : null,
                     }}
                     {...item}
                 />

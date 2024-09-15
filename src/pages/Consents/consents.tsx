@@ -1,5 +1,5 @@
 import React from "react";
-import { getConsents } from "../services/consentsAPI.ts";
+import { getConsents } from "../../services/consentsAPI.ts";
 
 import {
     GridColDef,
@@ -7,12 +7,13 @@ import {
 import Paper from '@mui/material/Paper';
 
 import { useQuery } from "@tanstack/react-query"
-import MUIDataGrid from "../components/DataGrid/MUIDataGrid.tsx";
-import { constructErrorMessage } from "../utils/errorHandling.ts";
-import ErrorScreen from "../components/ErrorScreen/ErrorScreen.tsx";
-import Paginator from "../components/Pagination/MUIPagination.tsx";
-import { transformConsentsForUI } from "../utils/consentChoiceTransformer.ts";
-import { IConsent } from "../interfaces/consentTypes.ts";
+import MUIDataGrid from "../../components/DataGrid/MUIDataGrid.tsx";
+import { constructErrorMessage } from "../../utils/errorHandling.ts";
+import ErrorScreen from "../../components/ErrorScreen/ErrorScreen.tsx";
+import Paginator from "../../components/Pagination/MUIPagination.tsx";
+import { transformConsentsForUI } from "../../utils/consentChoiceTransformer.ts";
+import { IConsent } from "../../interfaces/consentTypes.ts";
+import "./consents.css";
 
 export default function Consents(props: { consentsPerPage: number }) {
     const {
@@ -42,9 +43,9 @@ export default function Consents(props: { consentsPerPage: number }) {
         <ErrorScreen errorMessage={ constructErrorMessage(error) }/> : undefined;
 
     const columns: GridColDef[] = [
-        { field: "name", headerName: "Name", width: 150 },
-        { field: "email", headerName: "Email", width: 300 },
-        { field: "consentOptionsString", headerName: "Consent given for", width: 600 },
+        { field: "name", headerName: "Name", headerClassName: "consents-datagridColumnHeader", width: 150 },
+        { field: "email", headerName: "Email", headerClassName: "consents-datagridColumnHeader", width: 300 },
+        { field: "consentOptionsString", headerName: "Consent given for", headerClassName: "consents-datagridColumnHeader", width: 600 },
     ]
 
     return (

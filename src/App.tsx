@@ -7,7 +7,7 @@ import "./index.css";
 import Root from "./pages/Root/root.tsx";
 import ErrorPage from "./pages/errorPage.tsx";
 import Consent from "./pages/give-consent.tsx";
-import ConsentsList from "./pages/consents.tsx";
+import ConsentsList from "./pages/Consents/consents.tsx";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "./theme/theme.ts";
 
