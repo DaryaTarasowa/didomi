@@ -32,6 +32,7 @@ export default function MUIDataGrid<T>(props: IPaginatedTable<T>) {
             } }
         />
     }
+
     return (
         <DataGrid
             autoHeight

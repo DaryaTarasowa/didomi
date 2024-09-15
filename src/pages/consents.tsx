@@ -11,6 +11,8 @@ import MUIDataGrid from "../components/DataGrid/MUIDataGrid.tsx";
 import { constructErrorMessage } from "../utils/errorHandling.ts";
 import ErrorScreen from "../components/ErrorScreen/ErrorScreen.tsx";
 import Paginator from "../components/Pagination/MUIPagination.tsx";
+import { transformConsentsForUI } from "../utils/consentChoiceTransformer.ts";
+import { IConsent } from "../interfaces/consentTypes.ts";
 
 export default function Consents(props: { consentsPerPage: number }) {
     const {
@@ -18,7 +20,7 @@ export default function Consents(props: { consentsPerPage: number }) {
         isLoading,
         error,
         isError,
-        // isLoadingError,
+        isLoadingError,
         // refetch
     } = useQuery({
         queryKey: ["consents"],
@@ -28,23 +30,32 @@ export default function Consents(props: { consentsPerPage: number }) {
         retry: 1
     });
 
-    const errorOverlay = isError ? <ErrorScreen errorMessage = {constructErrorMessage(error)}/> : undefined;
+    const rows: IConsent[] = [];
+
+    if (data) {
+        rows.push(...transformConsentsForUI(data));
+
+        console.log(rows);
+    }
+
+    const errorOverlay = (isError || isLoadingError) ?
+        <ErrorScreen errorMessage={ constructErrorMessage(error) }/> : undefined;
 
     const columns: GridColDef[] = [
         { field: "name", headerName: "Name", width: 150 },
         { field: "email", headerName: "Email", width: 300 },
-        { field: "consents", headerName: "Consent given for", width: 400 },
+        { field: "consentOptionsString", headerName: "Consent given for", width: 600 },
     ]
 
     return (
         <Paper>
             <MUIDataGrid
-                columns={columns}
-                errorOverlay={errorOverlay}
-                itemsPerPage={props.consentsPerPage}
-                items={data}
-                isLoading={isLoading}
-                paginator={Paginator}
+                columns={ columns }
+                errorOverlay={ errorOverlay }
+                itemsPerPage={ props.consentsPerPage }
+                items={ rows }
+                isLoading={ isLoading }
+                paginator={ Paginator }
             />
         </Paper>
     )

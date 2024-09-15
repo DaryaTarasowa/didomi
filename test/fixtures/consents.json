@@ -3,120 +3,59 @@
     "name": "Darya",
     "email": "darya.surname@example.com",
     "consentOptions": [
-      {
-        "newsletter": true
-      },
-      {
-        "targetedAds": true
-      },
-      {
-        "statistics": true
-      }
+      "newsletter",
+      "targetedAds",
+      "statistics"
     ]
   },
   {
     "name": "Damian",
     "email": "damian-surname@example.com",
-    "consentOptions": [
-      {
-        "newsletter": false
-      },
-      {
-        "targetedAds": false
-      },
-      {
-        "statistics": false
-      }
-    ]
+    "consentOptions": []
   },
   {
     "name": "Peter",
     "email": "peter@example.com",
     "consentOptions": [
-      {
-        "newsletter": false
-      },
-      {
-        "targetedAds": true
-      },
-      {
-        "statistics": true
-      }
+      "targetedAds",
+      "statistics"
     ]
   },
   {
     "name": "Anna",
     "email": "anna@example.com",
     "consentOptions": [
-      {
-        "newsletter": true
-      },
-      {
-        "targetedAds": false
-      },
-      {
-        "statistics": true
-      }
+      "newsletter",
+      "statistics"
     ]
   },
   {
     "name": "Frank",
     "email": "frank@example.com",
     "consentOptions": [
-      {
-        "newsletter": true
-      },
-      {
-        "targetedAds": true
-      },
-      {
-        "statistics": false
-      }
+      "newsletter",
+      "targetedAds"
     ]
   },
   {
     "name": "Helen",
     "email": "helen@example.com",
     "consentOptions": [
-      {
-        "newsletter": true
-      },
-      {
-        "targetedAds": false
-      },
-      {
-        "statistics": false
-      }
+      "newsletter"
     ]
   },
   {
     "name": "Amin",
     "email": "amin@example.com",
     "consentOptions": [
-      {
-        "newsletter": false
-      },
-      {
-        "targetedAds": true
-      },
-      {
-        "statistics": false
-      }
+      "targetedAds"
     ]
   },
   {
     "name": "Sara",
     "email": "sara@example.com",
     "consentOptions": [
-      {
-        "newsletter": false
-      },
-      {
-        "targetedAds": false
-      },
-      {
-        "statistics": true
-      }
+      "statistics"
     ]
   },
   {
@@ -128,18 +67,18 @@
     "name": "Maria",
     "email": "maria@example.com",
     "consentOptions": [
-      {
-        "newsletter": true
-      }
+      "newsletter"
     ]
   },
   {
     "name": "Bob",
+    "email": "bob@example.com"
+  },
+  {
+    "name": "Broken",
     "email": "bob@example.com",
     "consentOptions": [
-      {
-        "targetedAds": false
-      }
+      "wrongOption"
     ]
   }
 ]

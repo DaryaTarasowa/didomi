@@ -1,13 +1,13 @@
-export type TConsentOptions = Map<string, boolean>
+import { CONSENT_NEWSLETTER, CONSENT_ADS, CONSENT_STATISTICS } from "../dictionaries/consentsDictionary.ts";
 
-export interface IConsent {
-    name: string,
-    email: string,
-    consentOptions: TConsentOptions
-}
+export type TConsentOptions =  (typeof CONSENT_NEWSLETTER | typeof CONSENT_ADS | typeof CONSENT_STATISTICS)[];
 
 export interface IConsentResponse {
     name: string,
     email: string,
-    consentOptions: {[key: string]: boolean}[]
+    consentOptions?: TConsentOptions
+}
+
+export interface IConsent extends IConsentResponse{
+    consentOptionsString?: string
 }

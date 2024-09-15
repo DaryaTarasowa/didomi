@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 export default function Root() {
     return (
         <>
-            <div id="sidebar">
+            <section id="sidebar">
                 <nav>
                     <ul>
                         <li>
@@ -15,8 +15,8 @@ export default function Root() {
                         </li>
                     </ul>
                 </nav>
-            </div>
-            <div id="detail"><Outlet/></div>
+            </section>
+            <section id="content"><Outlet/></section>
         </>
     );
 }
