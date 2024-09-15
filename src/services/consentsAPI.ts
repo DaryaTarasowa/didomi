@@ -1,4 +1,4 @@
-import { request } from "./network.ts"
+import { request } from "./network"
 
 export const getConsents = () =>
     request({
