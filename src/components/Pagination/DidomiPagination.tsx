@@ -7,7 +7,7 @@ import {
 } from "@mui/x-data-grid";
 
 
-export default function Paginator({
+export default function DidomiPagination({
                         page,
                         onPageChange,
                         className,

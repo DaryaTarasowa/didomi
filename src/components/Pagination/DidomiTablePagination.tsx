@@ -8,7 +8,7 @@ import {
     useGridSelector
 } from "@mui/x-data-grid";
 
-export default function Paginator({
+export default function DidomiTablePagination({
                                     page,
                                     onPageChange,
                                     className,

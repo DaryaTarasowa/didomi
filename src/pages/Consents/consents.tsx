@@ -7,10 +7,10 @@ import {
 import Paper from '@mui/material/Paper';
 
 import { useQuery } from "@tanstack/react-query"
-import MUIDataGrid from "../../components/DataGrid/MUIDataGrid.tsx";
+import DidomiDataGrid from "../../components/DataGrid/DidomiDataGrid.tsx";
 import { constructErrorMessage } from "../../utils/errorHandling.ts";
 import ErrorScreen from "../../components/ErrorScreen/ErrorScreen.tsx";
-import Paginator from "../../components/Pagination/MUIPagination.tsx";
+import DidomiPagination from "../../components/Pagination/DidomiPagination.tsx";
 import { transformConsentsForUI } from "../../utils/consentChoiceTransformer.ts";
 import { IConsent } from "../../interfaces/consentTypes.ts";
 import "./consents.css";
@@ -50,13 +50,13 @@ export default function Consents(props: { consentsPerPage: number }) {
 
     return (
         <Paper>
-            <MUIDataGrid
+            <DidomiDataGrid
                 columns={ columns }
-                errorOverlay={ errorOverlay }
+                customErrorOverlay={ errorOverlay }
                 itemsPerPage={ props.consentsPerPage }
                 items={ rows }
                 isLoading={ isLoading }
-                paginator={ Paginator }
+                paginator={ DidomiPagination }
             />
         </Paper>
     )
