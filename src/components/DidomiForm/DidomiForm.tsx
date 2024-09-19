@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, TextField } from "@mui/material";
 import * as yup from 'yup';
 import "./DidomiForm.css";
+import { consentsDictionary } from "../../dictionaries/consentsDictionary.ts";
 
 const validationSchema = yup.object({
     email: yup
@@ -13,10 +14,10 @@ const validationSchema = yup.object({
         .string()
         .min(5, 'Name should be of minimum 5 characters length')
         .required('Name is required'),
-    consentOptions: yup.array().min(1).of(yup.string().min(1).required()).required("At least one option must be selected")
+    consentOptions: yup.array().min(1, "At least one option must be selected").of(yup.string().min(1).required()).required()
 });
 
-const consentOptions = ["newsletter", "targetedAds", "statistics"];
+const consentOptions = Array.from(consentsDictionary.keys());
 
 export const DidomiForm = () => {
     const formik = useFormik({
@@ -33,12 +34,12 @@ export const DidomiForm = () => {
 
     return (
         <Box component="form" onSubmit={ formik.handleSubmit } className="didomi-form">
-            <Box className="didomi_form-row">
+            <Box className="didomi-form__row">
                 <TextField
                     id="name"
                     name="name"
                     size="small"
-                    className="didomi_form-field"
+                    className="didomi-form__field"
                     value={ formik.values.name }
                     onChange={ formik.handleChange }
                     onBlur={ formik.handleBlur }
@@ -60,17 +61,17 @@ export const DidomiForm = () => {
                     style={ { width: "300px" } }
                 />
             </Box>
-            <Box className="didomi_form-row">
+            <Box className="didomi-form__row">
                 <Box>I agree to:</Box>
             </Box>
-            <Box className="didomi_form-row">
+            <Box className="didomi-form__row">
                 <FormControl
                     error={formik.touched.consentOptions && Boolean(formik.errors.consentOptions)}>
-                    <FormGroup className="didomi_form-group">
+                    <FormGroup className="didomi-form__group">
                         { consentOptions.map((option) => (
                             <FormControlLabel
                                 key={ option }
-                                label={ option }
+                                label={ consentsDictionary.get(option) }
                                 control={
                                     <Checkbox
                                         id={ option }
@@ -92,10 +93,11 @@ export const DidomiForm = () => {
                             />
                         )) }
                     </FormGroup>
+                    <Box className="didomi-form__error-message">{formik.errors.consentOptions}</Box>
                 </FormControl>
             </Box>
 
-            <Button color="primary" variant="contained" fullWidth type="submit">
+            <Button color="primary" variant="contained" type="submit">
                 Give consent
             </Button>
         </Box>

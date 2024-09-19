@@ -5,23 +5,30 @@
     justify-content: center;
     width: 100%;
 
-    .didomi_form-row {
+    .didomi-form__row {
         display: flex;
         flex-direction: row;
         align-items: start;
         justify-content: center;
         margin: 10px 0;
 
-        .didomi_form-field {
+        .didomi-form__field {
             margin: 0 10px;
         }
 
-        .didomi_form-group {
+        .didomi-form__group {
             padding: 5px;
             width: 100%;
-            .Mui-error {
-                border: red 1px solid;
+            &.Mui-error {
+                border: var(--mui-palette-error-main) 1px solid;
+                border-radius: var(--mui-shape-borderRadius);
             }
         }
+    }
+
+    .didomi-form__error-message {
+        color: var(--mui-palette-error-main);
+        padding: 8px;
+        font-size: smaller;
     }
 }
