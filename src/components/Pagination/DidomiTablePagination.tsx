@@ -1,5 +1,3 @@
-import React from "react";
-
 import { TablePaginationProps, TablePagination } from "@mui/material";
 import {
     gridPageSizeSelector,

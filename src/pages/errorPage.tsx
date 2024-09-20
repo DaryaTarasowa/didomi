@@ -1,4 +1,3 @@
-import React from "react";
 import { useRouteError } from "react-router-dom";
 import ErrorScreen from "../components/ErrorScreen/ErrorScreen.tsx";
 import { constructErrorMessage } from "../utils/errorHandling.ts";

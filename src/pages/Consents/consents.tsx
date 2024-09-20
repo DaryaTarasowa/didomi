@@ -1,4 +1,3 @@
-import React from "react";
 import { getConsents } from "../../services/consentsAPI.ts";
 
 import {
@@ -41,9 +40,14 @@ export default function Consents(props: { consentsPerPage: number }) {
         <ErrorScreen errorMessage={ constructErrorMessage(error) }/> : undefined;
 
     const columns: GridColDef[] = [
-        { field: "name", headerName: "Name", headerClassName: "consents-datagridColumnHeader", width: 150 },
-        { field: "email", headerName: "Email", headerClassName: "consents-datagridColumnHeader", width: 300 },
-        { field: "consentOptionsString", headerName: "Consent given for", headerClassName: "consents-datagridColumnHeader", width: 600 },
+        { field: "name", headerName: "Name", headerClassName: "consents__datagrid__column-header", width: 150 },
+        { field: "email", headerName: "Email", headerClassName: "consents__datagrid__column-header", width: 300 },
+        {
+            field: "consentOptionsString",
+            headerName: "Consent given for",
+            headerClassName: "consents__datagrid__column-header",
+            width: 600
+        },
     ]
 
     return (

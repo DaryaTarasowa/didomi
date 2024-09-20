@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormik } from 'formik';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, TextField } from "@mui/material";
 import * as yup from 'yup';

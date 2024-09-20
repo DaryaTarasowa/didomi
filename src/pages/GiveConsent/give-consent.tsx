@@ -1,4 +1,3 @@
-import React from "react";
 import { DidomiForm } from "../../components/DidomiForm/DidomiForm.tsx";
 
 export default function Consent() {

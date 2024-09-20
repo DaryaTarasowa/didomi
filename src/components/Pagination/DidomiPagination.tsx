@@ -1,4 +1,3 @@
-import React from "react";
 import { Pagination as MuiPagination, PaginationItem, TablePaginationProps, Typography } from "@mui/material";
 import {
     gridPageCountSelector,
