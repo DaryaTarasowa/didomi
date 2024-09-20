@@ -35,8 +35,6 @@ export default function Consents(props: { consentsPerPage: number }) {
 
     if (data) {
         rows.push(...transformConsentsForUI(data));
-
-        console.log(rows);
     }
 
     const errorOverlay = (isError || isLoadingError) ?

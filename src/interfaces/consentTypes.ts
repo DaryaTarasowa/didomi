@@ -8,6 +8,12 @@ export interface IConsentResponse {
     consentOptions?: TConsentOptions
 }
 
+export interface IConsentRequest {
+    name: string,
+    email: string,
+    consentOptions?: TConsentOptions
+}
+
 export interface IConsent extends IConsentResponse{
     consentOptionsString?: string
 }

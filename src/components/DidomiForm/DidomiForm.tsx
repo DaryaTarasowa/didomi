@@ -4,6 +4,9 @@ import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, TextFi
 import * as yup from 'yup';
 import "./DidomiForm.css";
 import { consentsDictionary } from "../../dictionaries/consentsDictionary.ts";
+import { useMutation } from "@tanstack/react-query";
+import { addConsent } from "../../services/consentsAPI.ts";
+import { IConsentRequest, TConsentOptions } from "../../interfaces/consentTypes.ts";
 
 const validationSchema = yup.object({
     email: yup
@@ -17,19 +20,27 @@ const validationSchema = yup.object({
     consentOptions: yup.array().min(1, "At least one option must be selected").of(yup.string().min(1).required()).required()
 });
 
-const consentOptions = Array.from(consentsDictionary.keys());
+const consentOptions = Array.from(consentsDictionary.keys()) as TConsentOptions;
+
+const useConsentMutation = () => {
+    return useMutation({
+        mutationFn: (consentsData: IConsentRequest) => addConsent(consentsData),
+    });
+};
 
 export const DidomiForm = () => {
+    const { mutate } = useConsentMutation();
+    const submitConsent = async (values: { name: string; email: string; consentOptions: TConsentOptions; }) => {
+        mutate(values);
+    };
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
-            consentOptions: [] as string[]
+            consentOptions: [] as TConsentOptions
         },
         validationSchema,
-        onSubmit: (values) => {
-            console.log(values);
-        },
+        onSubmit: submitConsent
     });
 
     return (
@@ -66,7 +77,7 @@ export const DidomiForm = () => {
             </Box>
             <Box className="didomi-form__row">
                 <FormControl
-                    error={formik.touched.consentOptions && Boolean(formik.errors.consentOptions)}>
+                    error={ formik.touched.consentOptions && Boolean(formik.errors.consentOptions) }>
                     <FormGroup className="didomi-form__group">
                         { consentOptions.map((option) => (
                             <FormControlLabel
@@ -93,7 +104,9 @@ export const DidomiForm = () => {
                             />
                         )) }
                     </FormGroup>
-                    <Box className="didomi-form__error-message">{formik.errors.consentOptions}</Box>
+                    {formik.touched.consentOptions && formik.errors.consentOptions &&
+                        <Box className="didomi-form__error-message">{ formik.errors.consentOptions }</Box>
+                    }
                 </FormControl>
             </Box>
 

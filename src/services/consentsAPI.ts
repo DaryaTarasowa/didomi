@@ -1,4 +1,5 @@
 import { request } from "./network"
+import { IConsentRequest } from "../interfaces/consentTypes.ts";
 
 export const getConsents = () =>
     request({
@@ -6,10 +7,10 @@ export const getConsents = () =>
         method: "GET",
     })
 
-export const addConsent = (data: any) =>
+export const addConsent = (data: IConsentRequest) =>
     request({
         url: `consents`,
-        method: "POST",
+        method: "PUT",
         data
     })
 
