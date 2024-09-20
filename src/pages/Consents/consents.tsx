@@ -11,7 +11,7 @@ import { constructErrorMessage } from "../../utils/errorHandling.ts";
 import ErrorScreen from "../../components/ErrorScreen/ErrorScreen.tsx";
 import DidomiPagination from "../../components/Pagination/DidomiPagination.tsx";
 import { transformConsentsForUI } from "../../utils/consentChoiceTransformer.ts";
-import { IConsent } from "../../interfaces/consentTypes.ts";
+import { IConsent } from "../../interfaces/consentIntefaces.ts";
 import "./consents.css";
 
 export default function Consents(props: { consentsPerPage: number }) {
@@ -21,7 +21,6 @@ export default function Consents(props: { consentsPerPage: number }) {
         error,
         isError,
         isLoadingError,
-        // refetch
     } = useQuery({
         queryKey: ["consents"],
         queryFn: getConsents,
@@ -29,15 +28,6 @@ export default function Consents(props: { consentsPerPage: number }) {
         refetchOnWindowFocus: true,
         retry: 1
     });
-
-    const rows: IConsent[] = [];
-
-    if (data) {
-        rows.push(...transformConsentsForUI(data));
-    }
-
-    const errorOverlay = (isError || isLoadingError) ?
-        <ErrorScreen errorMessage={ constructErrorMessage(error) }/> : undefined;
 
     const columns: GridColDef[] = [
         { field: "name", headerName: "Name", headerClassName: "consents__datagrid__column-header", width: 150 },
@@ -49,6 +39,15 @@ export default function Consents(props: { consentsPerPage: number }) {
             width: 600
         },
     ]
+
+    const rows: IConsent[] = [];
+
+    if (data) {
+        rows.push(...transformConsentsForUI(data));
+    }
+
+    const errorOverlay = (isError || isLoadingError) ?
+        <ErrorScreen errorMessage={ constructErrorMessage(error) }/> : undefined;
 
     return (
         <Paper>

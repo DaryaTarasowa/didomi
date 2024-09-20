@@ -1,5 +1,5 @@
 import { request } from "./network"
-import { IConsentRequest } from "../interfaces/consentTypes.ts";
+import { IConsentRequest } from "../interfaces/consentIntefaces.ts";
 
 export const getConsents = () =>
     request({

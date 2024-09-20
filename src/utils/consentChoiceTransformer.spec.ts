@@ -8,7 +8,7 @@ import {
     transformConsentOptionsToString,
     transformConsentsForUI
 } from "./consentChoiceTransformer";
-import { TConsentOptions } from "../interfaces/consentTypes";
+import { TConsentOptions } from "../interfaces/consentIntefaces.ts";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const consentsFixture = require('../../test/fixtures/consents.json');
 

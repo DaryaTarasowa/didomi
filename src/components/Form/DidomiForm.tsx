@@ -1,35 +1,24 @@
 import { useFormik } from 'formik';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, TextField } from "@mui/material";
-import * as yup from 'yup';
 import "./DidomiForm.css";
 import { consentsDictionary } from "../../dictionaries/consentsDictionary.ts";
-import { useMutation } from "@tanstack/react-query";
-import { addConsent } from "../../services/consentsAPI.ts";
-import { IConsentRequest, TConsentOptions } from "../../interfaces/consentTypes.ts";
-
-const validationSchema = yup.object({
-    email: yup
-        .string()
-        .email('Enter a valid email')
-        .required('Email is required'),
-    name: yup
-        .string()
-        .min(5, 'Name should be of minimum 5 characters length')
-        .required('Name is required'),
-    consentOptions: yup.array().min(1, "At least one option must be selected").of(yup.string().min(1).required()).required()
-});
+import { IConsentRequest, TConsentOptions } from "../../interfaces/consentIntefaces.ts";
+import {
+    AnyObject,
+    ObjectSchema,
+} from "yup";
+import { useConsentMutation } from "../../Hooks/consentHooks.ts";
 
 const consentOptions = Array.from(consentsDictionary.keys()) as TConsentOptions;
 
-const useConsentMutation = () => {
-    return useMutation({
-        mutationFn: (consentsData: IConsentRequest) => addConsent(consentsData),
-    });
-};
+interface IDidomiProps<T> {
+    validationSchema: ObjectSchema<AnyObject, T>
+}
 
-export const DidomiForm = () => {
+export default function DidomiForm<T>(props: IDidomiProps<T>) {
     const { mutate } = useConsentMutation();
-    const submitConsent = async (values: { name: string; email: string; consentOptions: TConsentOptions; }) => {
+    const { validationSchema } = props;
+    const submitConsent = async (values: IConsentRequest) => {
         mutate(values);
     };
     const formik = useFormik({
@@ -103,7 +92,7 @@ export const DidomiForm = () => {
                             />
                         )) }
                     </FormGroup>
-                    {formik.touched.consentOptions && formik.errors.consentOptions &&
+                    { formik.touched.consentOptions && formik.errors.consentOptions &&
                         <Box className="didomi-form__error-message">{ formik.errors.consentOptions }</Box>
                     }
                 </FormControl>
