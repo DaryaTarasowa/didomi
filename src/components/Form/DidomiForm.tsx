@@ -2,25 +2,22 @@ import { useFormik } from 'formik';
 import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, TextField } from "@mui/material";
 import "./DidomiForm.css";
 import { consentsDictionary } from "../../dictionaries/consentsDictionary.ts";
-import { IConsentRequest, TConsentOptions } from "../../interfaces/consentIntefaces.ts";
+import { TConsentOptions } from "../../interfaces/consentIntefaces.ts";
 import {
     AnyObject,
     ObjectSchema,
 } from "yup";
-import { useConsentMutation } from "../../Hooks/consentHooks.ts";
 
 const consentOptions = Array.from(consentsDictionary.keys()) as TConsentOptions;
 
 interface IDidomiProps<T> {
     validationSchema: ObjectSchema<AnyObject, T>
+    onSubmit: (values: any) => void;
 }
 
 export default function DidomiForm<T>(props: IDidomiProps<T>) {
-    const { mutate } = useConsentMutation();
-    const { validationSchema } = props;
-    const submitConsent = async (values: IConsentRequest) => {
-        mutate(values);
-    };
+    const { validationSchema, onSubmit } = props;
+
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -28,14 +25,15 @@ export default function DidomiForm<T>(props: IDidomiProps<T>) {
             consentOptions: [] as TConsentOptions
         },
         validationSchema,
-        onSubmit: submitConsent
+        onSubmit,
     });
 
     return (
         <Box component="form" onSubmit={ formik.handleSubmit } className="didomi-form">
             <Box className="didomi-form__row">
                 <TextField
-                    id="name"
+                    id="consents-form__name"
+                    test-id="consents-form__name_input"
                     name="name"
                     size="small"
                     className="didomi-form__field"
@@ -98,7 +96,8 @@ export default function DidomiForm<T>(props: IDidomiProps<T>) {
                 </FormControl>
             </Box>
 
-            <Button color="primary" variant="contained" type="submit">
+            <Button color="primary" variant="contained" type="submit" disabled={!formik.dirty ||
+                Boolean(formik.errors.consentOptions || formik.errors.name || formik.errors.email) }>
                 Give consent
             </Button>
         </Box>

@@ -1,4 +1,4 @@
-import { IConsent, IConsentResponse, TConsentOptions } from "../interfaces/consentIntefaces.ts";
+import { IConsent, IConsentResponse, TConsentOptions } from "../interfaces/consentIntefaces";
 
 import { consentsDictionary } from "../dictionaries/consentsDictionary";
 
