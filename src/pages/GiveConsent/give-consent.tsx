@@ -4,6 +4,7 @@ import { array, object, ObjectSchema, string } from "yup";
 import { IConsentRequest, TConsentOptions } from "../../interfaces/consentIntefaces.ts";
 import { useConsentMutation } from "../../Hooks/consentHooks.ts";
 import { consentsDictionary } from "../../dictionaries/consentsDictionary.ts";
+import { useNavigate } from 'react-router-dom';
 
 export default function Consent() {
 
@@ -18,8 +19,9 @@ export default function Consent() {
             string().oneOf(Array.from(consentsDictionary.keys()) as TConsentOptions).required()
         ).required()
     });
-
-    const { mutate } = useConsentMutation();
+    const successCallback = () => navigate("/consents");
+    const { mutate } = useConsentMutation(successCallback);
+    const navigate = useNavigate();
     const submitConsent = async (values: IConsentRequest) => {
         mutate(values);
     };

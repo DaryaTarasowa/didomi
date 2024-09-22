@@ -3,6 +3,11 @@ management.
 
 # Local Installation
 
+## Prerequisites:
+1. node.js v20
+
+## Steps:
+
 1. Copy the .env.example file to .env.local, adjust when necessary - in most cases the default settings are valid
 2. npm install
 3. npm run dev
