@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router-dom";
-import ErrorScreen from "../components/ErrorScreen/ErrorScreen.tsx";
-import { constructErrorMessage } from "../utils/errorHandling.ts";
+import ErrorScreen from "../../components/ErrorScreen/ErrorScreen.tsx";
+import { constructErrorMessage } from "../../utils/errorHandling.ts";
 
 export default function ErrorPage() {
     const errorMessage = constructErrorMessage(useRouteError());

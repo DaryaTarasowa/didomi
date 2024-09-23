@@ -2,7 +2,7 @@ import DidomiForm from "../../components/Form/DidomiForm.tsx";
 import { array, object, ObjectSchema, string } from "yup";
 
 import { IConsentRequest, TConsentOptions } from "../../interfaces/consentIntefaces.ts";
-import { useConsentMutation } from "../../Hooks/consentHooks.ts";
+import { useConsentMutation } from "../../hooks/consentHooks.ts";
 import { consentsDictionary } from "../../dictionaries/consentsDictionary.ts";
 import { useNavigate } from 'react-router-dom';
 
